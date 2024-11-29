@@ -3,9 +3,10 @@ from app.resource.concat.preemptive import preemptiveSetting
 from app.module.sjf import SJF_Preemptive
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QPushButton, QTableWidget, QTableWidgetItem
+from PySide6.QtWidgets import QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QVBoxLayout
 from qfluentwidgets import Flyout, InfoBarIcon
 
+from app.module.gantt import GanttChart
 
 class PreemptiveInterface(BaseInterface):
     def __init__(self, parent=None):
@@ -72,8 +73,36 @@ class PreemptiveInterface(BaseInterface):
                 isClosable=True
             )
         else:
-            # TODO: Implement UI for SJF Preemptive
-
             sjf = SJF_Preemptive(table_data)
             akhir, AWT, ATA = sjf.findavgTime(sjf.process, sjf.length)
-            print(akhir, AWT, ATA)
+
+            # Gantt Chart
+
+            result_value_awt = self.findChild(QLineEdit, 'resultAWTValue')
+            if result_value_awt:
+                result_value_awt.setText(str(f"{AWT:.2f} ms"))
+
+            result_value_atat = self.findChild(QLineEdit, 'resultATATValue')
+            if result_value_atat:
+                result_value_atat.setText(str(f"{ATA:.2f} ms"))
+
+            result_table_widget = self.findChild(QTableWidget, 'resultTable')
+            if result_table_widget:
+                result_table_widget.setRowCount(len(akhir))
+
+                for row, (process, burst, waiting, turnaround) in enumerate(akhir):
+                    process_n = QTableWidgetItem(process)
+                    process_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
+                    result_table_widget.setItem(row, 0, process_n)
+
+                    burst_n = QTableWidgetItem(str(burst))
+                    burst_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
+                    result_table_widget.setItem(row, 1, burst_n)
+
+                    waiting_n = QTableWidgetItem(str(waiting))
+                    waiting_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
+                    result_table_widget.setItem(row, 2, waiting_n)
+
+                    turnaround_n = QTableWidgetItem(str(turnaround))
+                    turnaround_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
+                    result_table_widget.setItem(row, 3, turnaround_n)

@@ -1,6 +1,6 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QHeaderView, QSizePolicy, QTableWidget, QTableWidgetItem
-from qfluentwidgets import TableWidget, PushButton
+from qfluentwidgets import TableWidget, PushButton, LineEdit
 
 
 class preemptiveCardManager:
@@ -48,6 +48,56 @@ class preemptiveCardManager:
         cardWidget.setLayout(vBoxLayout)
 
         self.cards['preemptive'] = cardWidget
+        return cardWidget
+
+    def resultPreemptiveCards(self, parent):
+        vBoxLayout = QVBoxLayout()
+        vBoxLayout.setContentsMargins(0, 0, 0, 0)
+
+        # Gantt Chart
+
+        # Average Waiting Time
+        hBoxLayout = QHBoxLayout()
+        hBoxLayout.setContentsMargins(0, 0, 0, 0)
+        resultTitle = QLabel('Average Waiting Time')
+        resultTitle.setObjectName('resultAWT')
+        resultTitle.setStyleSheet('font-weight: bold;')
+        hBoxLayout.addWidget(resultTitle)
+
+        resultValue = LineEdit(parent)
+        resultValue.setObjectName('resultAWTValue')
+        resultValue.setReadOnly(True)
+        hBoxLayout.addWidget(resultValue)
+        vBoxLayout.addLayout(hBoxLayout)
+
+        # Average Turn-Around Time
+        hBoxLayout = QHBoxLayout()
+        hBoxLayout.setContentsMargins(0, 0, 0, 0)
+        resultTitles = QLabel('Average Turn-Around Time')
+        resultTitles.setObjectName('resultATAT')
+        resultTitles.setStyleSheet('font-weight: bold;')
+        hBoxLayout.addWidget(resultTitles)
+
+        resultValues = LineEdit(parent)
+        resultValues.setObjectName('resultATATValue')
+        resultValues.setReadOnly(True)
+        hBoxLayout.addWidget(resultValues)
+        vBoxLayout.addLayout(hBoxLayout)
+
+        # Table
+        tableWidget = TableWidget(parent)
+        tableWidget.setObjectName('resultTable')
+        tableWidget.setColumnCount(4)
+        tableWidget.setHorizontalHeaderLabels(
+            ['Process', 'Burst Time', 'Waiting Time', 'Turn-Around Time'])
+        tableWidget.horizontalHeader().setStretchLastSection(True)
+        tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        vBoxLayout.addWidget(tableWidget)
+
+        cardWidget = QWidget()
+        cardWidget.setLayout(vBoxLayout)
+
+        self.cards['resultPreemptive'] = cardWidget
         return cardWidget
 
     def getCard(self, cardName):

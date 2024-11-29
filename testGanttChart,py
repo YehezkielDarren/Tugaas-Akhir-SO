@@ -1,3 +1,9 @@
+import sys
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
+
+
 import matplotlib.pyplot as plt
 
 
@@ -6,8 +12,6 @@ class GanttChart:
         self.data = sorted(data, key=lambda x: x[2])
 
     def render(self):
-        plt.clf()
-
         current_time = 0
         timeline = []
         labels = []
@@ -25,7 +29,7 @@ class GanttChart:
             labels.append(process_name)
             current_time = end_time
 
-        fig, ax = plt.subplots(figsize=(6, 4), facecolor='none')
+        fig, ax = plt.subplots(figsize=(8, 6), facecolor='none')
 
         for i, (start, end) in enumerate(timeline):
             color = "lightgray" if labels[i] == "Idle" else "skyblue"
@@ -45,3 +49,44 @@ class GanttChart:
         ax.spines['bottom'].set_linewidth(0.5)
 
         return fig
+
+
+class GanttChartWidget(QWidget):
+    def __init__(self, gantt_data):
+        super().__init__()
+        self.setWindowTitle("Gantt Chart in Qt")
+
+        # Set up layout
+        layout = QVBoxLayout()
+
+        # Create Gantt chart and canvas
+        gantt_chart = GanttChart(gantt_data)
+        figure = gantt_chart.render()
+
+        canvas = FigureCanvas(figure)
+
+        # Add canvas to the layout
+        layout.addWidget(canvas)
+
+        # Set the layout for the widget
+        self.setLayout(layout)
+
+
+def main():
+    app = QApplication(sys.argv)
+
+    gantt_data = [
+        ("P1", 3, 0),
+        ("P2", 4, 1),
+        ("P3", 2, 3),
+        ("P4", 5, 10)
+    ]
+
+    window = GanttChartWidget(gantt_data)
+    window.show()
+
+    sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()
