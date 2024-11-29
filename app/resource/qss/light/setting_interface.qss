@@ -1,0 +1,19 @@
+#scrollWidget {
+    background-color: transparent;
+}
+
+QScrollArea {
+    background-color: transparent;
+    border: none;
+}
+
+QToolTip {
+    background-color: white;
+    color: #202020;
+    border: 0.5px solid #6A737D;
+    border-radius: 5px;
+}
+
+QLabel {
+    background-color: transparent;
+}

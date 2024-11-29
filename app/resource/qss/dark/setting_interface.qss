@@ -1,0 +1,30 @@
+#scrollWidget {
+    background-color: transparent;
+}
+
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+
+QLabel {
+    background-color: transparent;
+    color: white;
+}
+
+QToolTip {
+    background-color: #202020;
+    color: white;
+    border: 0.5px solid #6A737D;
+    border-radius: 5px;
+}
+
+#titleAnime {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+#genreAnime {
+    color: #6A737D;
+    margin-bottom: 15px;
+}
