@@ -60,9 +60,5 @@ class PreemptiveInterface(BaseInterface):
             )
         else:
             sjf = SJF_Preemptive(table_data)
-            # Kalo Mau yang print
-            sjf.findavgTime(sjf.process, sjf.length)
-
-            # Kalo mau Make yang result
-            # akhir, AWT, ATA = sjf.findavgTime(sjf.process, sjf.length)
-            # print(akhir, AWT, ATA)
+            akhir, AWT, ATA = sjf.findavgTime(sjf.process, sjf.length)
+            print(akhir, AWT, ATA)
