@@ -1,4 +1,5 @@
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QHeaderView, QSizePolicy
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QHeaderView, QSizePolicy, QTableWidget, QTableWidgetItem
 from qfluentwidgets import TableWidget, PushButton
 
 
@@ -28,6 +29,12 @@ class preemptiveCardManager:
         tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         tableWidget.setSizePolicy(
             QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        for row in range(tableWidget.rowCount()):
+            item = QTableWidgetItem()
+            item.setFlags(~Qt.ItemFlag.ItemIsEditable)
+            tableWidget.setItem(row, 0, item)
+
         vBoxLayout.addWidget(tableWidget)
 
         # Buttons
