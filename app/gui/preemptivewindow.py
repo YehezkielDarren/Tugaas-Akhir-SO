@@ -1,5 +1,6 @@
 from app.gui.base.interface import BaseInterface
 from app.resource.concat.preemptive import preemptiveSetting
+from app.module.sjf import SJF_Preemptive
 
 from PySide6.QtWidgets import QPushButton, QTableWidget
 from qfluentwidgets import Flyout, InfoBarIcon
@@ -34,6 +35,11 @@ class PreemptiveInterface(BaseInterface):
             for col in range(table_widget.columnCount()):
                 item = table_widget.item(row, col)
                 cell_text = item.text() if item else ""
+                if col == 1 or col == 2:
+                    try:
+                        cell_text = int(cell_text) if cell_text else 0
+                    except ValueError:
+                        cell_text = 0
                 if not cell_text:
                     row_is_empty = True
 
@@ -53,4 +59,10 @@ class PreemptiveInterface(BaseInterface):
                 isClosable=True
             )
         else:
-            print(table_data)
+            sjf = SJF_Preemptive(table_data)
+            # Kalo Mau yang print
+            sjf.findavgTime(sjf.process, sjf.length)
+
+            # Kalo mau Make yang result
+            # akhir, AWT, ATA = sjf.findavgTime(sjf.process, sjf.length)
+            # print(akhir, AWT, ATA)
