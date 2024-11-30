@@ -35,7 +35,11 @@ class GanttChart:
                     labels[i], ha='center', va='center', color="black", fontsize=12)
 
         ax.set_yticks([])
-        ax.set_xticks(range(0, max(t[1] for t in timeline) + 1, 1))
+        
+        # Menentukan ticks hanya pada start dan end times dari proses dan idle
+        time_ticks = sorted(set([start for start, _ in timeline] + [end for _, end in timeline]))
+        ax.set_xticks(time_ticks)
+        
         ax.set_xlim(0, max(t[1] for t in timeline))
         ax.grid(axis='x', linestyle='--', alpha=0.7)
 

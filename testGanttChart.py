@@ -28,7 +28,7 @@ class GanttChartWidget(QWidget):
 def main():
     app = QApplication(sys.argv)
 
-    gantt_data = [['P1', 3, 3, 0, 3], ['P2', 2, 5, 2, 4]]
+    gantt_data = [['P1', 8, 17, 9, 17], ['P2', 4, 5, 0, 4], ['P3', 9, 26, 15, 24], ['P4', 5, 10, 2, 7]]
 
     window = GanttChartWidget(gantt_data)
     window.show()
