@@ -25,7 +25,7 @@ class GanttChart:
             labels.append(process_name)
             current_time = end_time
 
-        fig, ax = plt.subplots(figsize=(6, 4), facecolor='none')
+        fig, ax = plt.subplots(figsize=(10, 5), facecolor='none')
 
         for i, (start, end) in enumerate(timeline):
             color = "lightgray" if labels[i] == "Idle" else "skyblue"
@@ -35,11 +35,10 @@ class GanttChart:
                     labels[i], ha='center', va='center', color="black", fontsize=12)
 
         ax.set_yticks([])
-        
-        # Menentukan ticks hanya pada start dan end times dari proses dan idle
-        time_ticks = sorted(set([start for start, _ in timeline] + [end for _, end in timeline]))
+        time_ticks = sorted(
+            set([start for start, _ in timeline] + [end for _, end in timeline]))
         ax.set_xticks(time_ticks)
-        
+
         ax.set_xlim(0, max(t[1] for t in timeline))
         ax.grid(axis='x', linestyle='--', alpha=0.7)
 

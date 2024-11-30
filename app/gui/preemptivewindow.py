@@ -3,10 +3,11 @@ from app.resource.concat.preemptive import preemptiveSetting
 from app.module.sjf import SJF_Preemptive
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QPushButton, QTableWidget, QTableWidgetItem, QLineEdit
-from qfluentwidgets import InfoBarIcon, InfoBar, InfoBarPosition, PrimaryPushSettingCard
+from PySide6.QtWidgets import QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QVBoxLayout, QWidget
+from qfluentwidgets import InfoBarIcon, InfoBar, InfoBarPosition, PrimaryPushSettingCard, FluentWindow
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 
-from app.module.gantt import GanttChart
+from app.gui.ganttWindow import GanttWindow
 
 
 class PreemptiveInterface(BaseInterface):
@@ -83,7 +84,9 @@ class PreemptiveInterface(BaseInterface):
         else:
             sjf = SJF_Preemptive(table_data)
             akhir, AWT, ATA = sjf.findAverageTime()
-            print(akhir)
+            
+            self.gantt_window = GanttWindow(akhir)
+            self.gantt_window.show()
 
     def on_startButton_click(self):
         table_widget = self.findChild(QTableWidget, 'processTable')
