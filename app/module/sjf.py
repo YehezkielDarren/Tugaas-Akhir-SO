@@ -6,7 +6,7 @@ class SJF_Preemptive:
     def findWaitingTime(self, processes, n, wt):
         rt = [0] * n
         for i in range(n):
-            rt[i] = processes[i][1]
+            rt[i] = processes[i][2]
 
         complete = 0
         t = 0
@@ -16,7 +16,7 @@ class SJF_Preemptive:
 
         while complete != n:
             for j in range(n):
-                if (processes[j][2] <= t and rt[j] < minm and rt[j] > 0):
+                if (processes[j][1] <= t and rt[j] < minm and rt[j] > 0):
                     minm = rt[j]
                     short = j
                     check = True
@@ -34,7 +34,7 @@ class SJF_Preemptive:
                 complete += 1
                 check = False
                 fint = t + 1
-                wt[short] = fint - processes[short][1] - processes[short][2]
+                wt[short] = fint - processes[short][2] - processes[short][1]
                 if wt[short] < 0:
                     wt[short] = 0
 
@@ -42,7 +42,7 @@ class SJF_Preemptive:
 
     def findTurnAroundTime(self, processes, n, wt, tat):
         for i in range(n):
-            tat[i] = processes[i][1] + wt[i]
+            tat[i] = processes[i][2] + wt[i]
 
     def findavgTime(self, processes, n):
         wt = [0] * n
@@ -56,6 +56,6 @@ class SJF_Preemptive:
         for i in range(n):
             total_wt += wt[i]
             total_tat += tat[i]
-            result.append([processes[i][0], processes[i][1], wt[i], tat[i]])
+            result.append([processes[i][0], processes[i][2], wt[i], tat[i]])
 
         return result, total_wt / n, total_tat / n

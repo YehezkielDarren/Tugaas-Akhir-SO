@@ -1,6 +1,6 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QHeaderView, QSizePolicy, QTableWidget, QTableWidgetItem
-from qfluentwidgets import TableWidget, PushButton, LineEdit
+from qfluentwidgets import TableWidget, PushButton, LineEdit, PrimaryPushSettingCard, FluentIcon as FIF
 
 
 class preemptiveCardManager:
@@ -24,7 +24,7 @@ class preemptiveCardManager:
         tableWidget.setRowCount(10)
         tableWidget.setColumnCount(3)
         tableWidget.setHorizontalHeaderLabels(
-            ['Process', 'Burst Time', 'Arrival Time'])
+            ['Process', 'Arrival Time', 'Burst Time'])
         tableWidget.horizontalHeader().setStretchLastSection(True)
         tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         tableWidget.setSizePolicy(
@@ -55,6 +55,15 @@ class preemptiveCardManager:
         vBoxLayout.setContentsMargins(0, 0, 0, 0)
 
         # Gantt Chart
+        ganttChart = PrimaryPushSettingCard(
+            'Gantt Chart',
+            FIF.VIEW,
+            'View Gantt Chart',
+            f'Visual representation of the scheduling algorithm',
+            parent
+        )
+        ganttChart.setObjectName('ganttChart')
+        vBoxLayout.addWidget(ganttChart)
 
         # Average Waiting Time
         hBoxLayout = QHBoxLayout()

@@ -1,3 +1,5 @@
+# TODO: Fix the gantt chart rendering
+
 import matplotlib.pyplot as plt
 
 
