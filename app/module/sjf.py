@@ -3,7 +3,7 @@ class SJF_Preemptive:
         self.processes = processes
         self.n = len(processes)
 
-    def findWaitingTime(self, wt):
+    def findWaitingTime(self, wt, completion_time):
         rt = [self.processes[i][2] for i in range(self.n)]
         complete = 0
         t = 0
@@ -29,8 +29,8 @@ class SJF_Preemptive:
                 complete += 1
                 check = False
                 finish_time = t + 1
-                wt[shortest] = finish_time - self.processes[shortest][2] - \
-                    self.processes[shortest][1]
+                completion_time[shortest] = finish_time
+                wt[shortest] = finish_time - self.processes[shortest][2] - self.processes[shortest][1]
                 if wt[shortest] < 0:
                     wt[shortest] = 0
 
@@ -43,9 +43,10 @@ class SJF_Preemptive:
     def findAverageTime(self):
         wt = [0] * self.n
         tat = [0] * self.n
+        completion_time = [0] * self.n
         result = []
 
-        self.findWaitingTime(wt)
+        self.findWaitingTime(wt, completion_time)
         self.findTurnAroundTime(wt, tat)
 
         total_wt = sum(wt)
@@ -53,7 +54,7 @@ class SJF_Preemptive:
 
         for i in range(self.n):
             result.append(
-                [self.processes[i][0], self.processes[i][2], wt[i], tat[i]])
+                [self.processes[i][0], self.processes[i][2], completion_time[i], wt[i], tat[i]])
 
         avg_wt = total_wt / self.n
         avg_tat = total_tat / self.n

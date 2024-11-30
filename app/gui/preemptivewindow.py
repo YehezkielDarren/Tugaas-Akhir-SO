@@ -139,7 +139,7 @@ class PreemptiveInterface(BaseInterface):
             if result_table_widget:
                 result_table_widget.setRowCount(len(akhir))
 
-                for row, (process, burst, waiting, turnaround) in enumerate(akhir):
+                for row, (process, burst, complete, waiting, turnaround) in enumerate(akhir):
                     process_n = QTableWidgetItem(process)
                     process_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
                     result_table_widget.setItem(row, 0, process_n)
@@ -148,10 +148,14 @@ class PreemptiveInterface(BaseInterface):
                     burst_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
                     result_table_widget.setItem(row, 1, burst_n)
 
+                    complete_n = QTableWidgetItem(str(complete))
+                    complete_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
+                    result_table_widget.setItem(row, 2, complete_n)
+
                     waiting_n = QTableWidgetItem(str(waiting))
                     waiting_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
-                    result_table_widget.setItem(row, 2, waiting_n)
+                    result_table_widget.setItem(row, 3, waiting_n)
 
                     turnaround_n = QTableWidgetItem(str(turnaround))
                     turnaround_n.setFlags(~Qt.ItemFlag.ItemIsEditable)
-                    result_table_widget.setItem(row, 3, turnaround_n)
+                    result_table_widget.setItem(row, 4, turnaround_n)
