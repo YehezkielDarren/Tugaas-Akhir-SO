@@ -1,61 +1,61 @@
 class SJF_Preemptive:
-    def __init__(self, process):
-        self.process = process
-        self.length = len(process)
+    def __init__(self, processes):
+        self.processes = processes
+        self.n = len(processes)
 
-    def findWaitingTime(self, processes, n, wt):
-        rt = [0] * n
-        for i in range(n):
-            rt[i] = processes[i][2]
-
+    def findWaitingTime(self, wt):
+        rt = [self.processes[i][2] for i in range(self.n)]
         complete = 0
         t = 0
-        minm = float('inf')
-        short = -1
+        min_rt = float('inf')
+        shortest = -1
         check = False
 
-        while complete != n:
-            for j in range(n):
-                if (processes[j][1] <= t and rt[j] < minm and rt[j] > 0):
-                    minm = rt[j]
-                    short = j
+        while complete != self.n:
+            for i in range(self.n):
+                if self.processes[i][1] <= t and rt[i] < min_rt and rt[i] > 0:
+                    min_rt = rt[i]
+                    shortest = i
                     check = True
 
             if not check:
                 t += 1
                 continue
 
-            rt[short] -= 1
-            minm = rt[short]
-            if minm == 0:
-                minm = float('inf')
+            rt[shortest] -= 1
+            min_rt = rt[shortest] if rt[shortest] > 0 else float('inf')
 
-            if rt[short] == 0:
+            if rt[shortest] == 0:
                 complete += 1
                 check = False
-                fint = t + 1
-                wt[short] = fint - processes[short][2] - processes[short][1]
-                if wt[short] < 0:
-                    wt[short] = 0
+                finish_time = t + 1
+                wt[shortest] = finish_time - self.processes[shortest][2] - \
+                    self.processes[shortest][1]
+                if wt[shortest] < 0:
+                    wt[shortest] = 0
 
             t += 1
 
-    def findTurnAroundTime(self, processes, n, wt, tat):
-        for i in range(n):
-            tat[i] = processes[i][2] + wt[i]
+    def findTurnAroundTime(self, wt, tat):
+        for i in range(self.n):
+            tat[i] = self.processes[i][2] + wt[i]
 
-    def findavgTime(self, processes, n):
-        wt = [0] * n
-        tat = [0] * n
+    def findAverageTime(self):
+        wt = [0] * self.n
+        tat = [0] * self.n
         result = []
-        self.findWaitingTime(processes, n, wt)
-        self.findTurnAroundTime(processes, n, wt, tat)
 
-        total_wt = 0
-        total_tat = 0
-        for i in range(n):
-            total_wt += wt[i]
-            total_tat += tat[i]
-            result.append([processes[i][0], processes[i][2], wt[i], tat[i]])
+        self.findWaitingTime(wt)
+        self.findTurnAroundTime(wt, tat)
 
-        return result, total_wt / n, total_tat / n
+        total_wt = sum(wt)
+        total_tat = sum(tat)
+
+        for i in range(self.n):
+            result.append(
+                [self.processes[i][0], self.processes[i][2], wt[i], tat[i]])
+
+        avg_wt = total_wt / self.n
+        avg_tat = total_tat / self.n
+
+        return result, avg_wt, avg_tat

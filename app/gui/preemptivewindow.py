@@ -65,7 +65,7 @@ class PreemptiveInterface(BaseInterface):
 
             if not row_is_empty:
                 table_data.append(row_data)
-        
+
         if (len(table_data) < 1):
             InfoBar.warning(
                 title='Process Required',
@@ -78,7 +78,7 @@ class PreemptiveInterface(BaseInterface):
             ),
         else:
             sjf = SJF_Preemptive(table_data)
-            akhir, AWT, ATA = sjf.findavgTime(sjf.process, sjf.length)
+            akhir, AWT, ATA = sjf.findAverageTime()
             print(akhir)
 
     def on_startButton_click(self):
@@ -87,22 +87,26 @@ class PreemptiveInterface(BaseInterface):
 
         for row in range(table_widget.rowCount()):
             row_data = []
-            row_is_empty = False
+            row_valid = True
 
             for col in range(table_widget.columnCount()):
                 item = table_widget.item(row, col)
-                cell_text = item.text() if item else ""
-                if col == 1 or col == 2:
-                    try:
-                        cell_text = int(cell_text) if cell_text else 0
-                    except ValueError:
-                        cell_text = 0
+                cell_text = item.text().strip() if item else ""
+
                 if not cell_text:
-                    row_is_empty = True
+                    row_valid = False
+                    break
+
+                if col in [1, 2]:
+                    try:
+                        cell_text = int(cell_text)
+                    except ValueError:
+                        row_valid = False
+                        break
 
                 row_data.append(cell_text)
 
-            if not row_is_empty:
+            if row_valid:
                 table_data.append(row_data)
 
         if (len(table_data) < 1):
@@ -116,8 +120,9 @@ class PreemptiveInterface(BaseInterface):
                 parent=self
             ),
         else:
+            print(table_data)
             sjf = SJF_Preemptive(table_data)
-            akhir, AWT, ATA = sjf.findavgTime(sjf.process, sjf.length)
+            akhir, AWT, ATA = sjf.findAverageTime()
 
             result_value_awt = self.findChild(QLineEdit, 'resultAWTValue')
             if result_value_awt:
