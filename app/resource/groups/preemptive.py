@@ -10,5 +10,10 @@ class preemptiveGroupManager:
         self.groups['preemptive'] = group
         return group
 
+    def resultPreemptiveGroup(self, parent):
+        group = SettingCardGroup('Result', parent)
+        self.groups['resultPreemptive'] = group
+        return group
+
     def getGroup(self, groupName):
         return self.groups.get(groupName)
