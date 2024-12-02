@@ -71,6 +71,18 @@ class PreemptiveInterface(BaseInterface):
             if row_valid:
                 table_data.append(row_data)
 
+        if any(row[2] == 0 for row in table_data):
+            InfoBar.warning(
+                title='Burst Time',
+                content="Burst time cannot be 0.",
+                orient=Qt.Horizontal,
+                isClosable=True,
+                position=InfoBarPosition.TOP,
+                duration=2000,
+                parent=self
+            )
+            return
+
         if (len(table_data) < 1):
             InfoBar.warning(
                 title='Process Required',
@@ -84,7 +96,7 @@ class PreemptiveInterface(BaseInterface):
         else:
             sjf = SJF_Preemptive(table_data)
             akhir, AWT, ATA = sjf.findAverageTime()
-            
+
             self.gantt_window = GanttWindow(akhir)
             self.gantt_window.show()
 
@@ -115,6 +127,18 @@ class PreemptiveInterface(BaseInterface):
 
             if row_valid:
                 table_data.append(row_data)
+
+        if any(row[2] == 0 for row in table_data):
+            InfoBar.warning(
+                title='Burst Time',
+                content="Burst time cannot be 0.",
+                orient=Qt.Horizontal,
+                isClosable=True,
+                position=InfoBarPosition.TOP,
+                duration=2000,
+                parent=self
+            )
+            return
 
         if (len(table_data) < 1):
             InfoBar.warning(
