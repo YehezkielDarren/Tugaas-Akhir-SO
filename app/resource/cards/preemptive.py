@@ -96,9 +96,9 @@ class preemptiveCardManager:
         # Table
         tableWidget = TableWidget(parent)
         tableWidget.setObjectName('resultTable')
-        tableWidget.setColumnCount(5)
+        tableWidget.setColumnCount(6)
         tableWidget.setHorizontalHeaderLabels(
-            ['Process', 'Burst Time', 'Finish Time', 'Waiting Time', 'Turn-Around Time'])
+            ['Process', 'Arrival Time', 'Burst Time', 'Finish Time', 'Waiting Time', 'Turn-Around Time'])
         tableWidget.horizontalHeader().setStretchLastSection(True)
         tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         vBoxLayout.addWidget(tableWidget)

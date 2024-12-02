@@ -54,7 +54,7 @@ class SJF_Preemptive:
 
         for i in range(self.n):
             result.append(
-                [self.processes[i][0], self.processes[i][2], completion_time[i], wt[i], tat[i]])
+                [self.processes[i][0], self.processes[i][1], self.processes[i][2], completion_time[i], wt[i], tat[i]])
 
         avg_wt = total_wt / self.n
         avg_tat = total_tat / self.n

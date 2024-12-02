@@ -12,9 +12,9 @@ class GanttChart:
 
         current_time = 0
         for process in self.data:
-            process_name, burst_time, completion_time, waiting_time, turnaround_time = process
+            process_name, arrival_time, burst_time, completion_time, waiting_time, turnaround_time = process
 
-            if current_time < completion_time:
+            if current_time > arrival_time:
                 timeline.append((current_time, completion_time))
                 labels.append("Idle")
                 current_time = completion_time

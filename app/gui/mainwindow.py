@@ -37,7 +37,7 @@ class MainWindow(MSFluentWindow):
 
     def __setup(self):
         self.setWindowTitle('Sistem Operasi')
-        self.resize(800, 600)
+        self.resize(1000, 600)
         self.setAcceptDrops(True)
 
         desktop = QApplication.primaryScreen().availableGeometry()
