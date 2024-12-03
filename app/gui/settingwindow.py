@@ -1,6 +1,7 @@
 from app.gui.base.interface import BaseInterface
 from app.resource.concat.setting import concatSetting
-
+from qfluentwidgets import PrimaryPushSettingCard
+from app.gui.aboutWindow import AboutWindow
 
 class SettingInterface(BaseInterface):
     def __init__(self, parent=None):
