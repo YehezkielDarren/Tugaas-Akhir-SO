@@ -23,12 +23,13 @@ class settingCardManager:
 
     def aboutCard(self, parent):
         card = PrimaryPushSettingCard(
-            'Check update',
+            'About',
             FIF.INFO,
             'About',
             f'© Copyright {YEAR}, {AUTHOR}. Version {VERSION}',
             parent
         )
+        card.setObjectName('aboutButton')
         self.cards['about'] = card
         return card
 

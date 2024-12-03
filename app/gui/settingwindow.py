@@ -15,3 +15,11 @@ class SettingInterface(BaseInterface):
 
         for group in groups.values():
             self.layout.addWidget(group)
+
+            about = group.findChild(PrimaryPushSettingCard, 'aboutButton')
+            if about:
+                about.clicked.connect(self.on_aboutButton_click)
+
+    def on_aboutButton_click(self):
+        self.about_window = AboutWindow()
+        self.about_window.show()
