@@ -37,12 +37,19 @@ class preemptiveCardManager:
 
         vBoxLayout.addWidget(tableWidget)
 
-        # Buttons
+        # Start Buttons
         startButton = PushButton('Start', parent)
         startButton.setObjectName('startProcess')
         startButton.setSizePolicy(
             QSizePolicy.Expanding, QSizePolicy.Fixed)
         vBoxLayout.addWidget(startButton)
+
+        # Clear Button
+        clearButton = PushButton('Clear', parent)
+        clearButton.setObjectName('clearProcess')
+        clearButton.setSizePolicy(
+            QSizePolicy.Expanding, QSizePolicy.Fixed)
+        vBoxLayout.addWidget(clearButton)
 
         cardWidget = QWidget()
         cardWidget.setLayout(vBoxLayout)

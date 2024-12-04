@@ -25,10 +25,13 @@ class PreemptiveInterface(BaseInterface):
             self.layout.addWidget(group)
 
             start_button = group.findChild(QPushButton, 'startProcess')
+            clear_button = group.findChild(QPushButton, 'clearProcess')
             tableWidget = group.findChild(QTableWidget, 'processTable')
             ganttWidget = group.findChild(PrimaryPushSettingCard, 'ganttChart')
             if start_button:
                 start_button.clicked.connect(self.on_startButton_click)
+            if clear_button:
+                clear_button.clicked.connect(self.on_clearButton_click)
             if tableWidget:
                 tableWidget.itemChanged.connect(self.on_table_item_changed)
             if ganttWidget:
@@ -142,6 +145,48 @@ class PreemptiveInterface(BaseInterface):
 
             self.gantt_window = GanttWindow(akhir)
             self.gantt_window.show()
+
+    def on_clearButton_click(self):
+        table_widget = self.findChild(QTableWidget, 'processTable')
+        is_empty = True
+
+        for row in range(table_widget.rowCount()):
+            for col in range(table_widget.columnCount()):
+                item = table_widget.item(row, col)
+                if item is not None and item.text() != "":
+                    is_empty = False
+                    break
+            if not is_empty:
+                break
+
+        if is_empty:
+            InfoBar.warning(
+                title='Table Empty',
+                content="Table is already empty.",
+                orient=Qt.Horizontal,
+                isClosable=True,
+                position=InfoBarPosition.TOP,
+                duration=2000,
+                parent=self
+            )
+            return
+
+        InfoBar.success(
+            title='Table Cleared',
+            content="Table has been cleared.",
+            orient=Qt.Horizontal,
+            isClosable=True,
+            position=InfoBarPosition.TOP,
+            duration=2000,
+            parent=self
+        )
+
+        for row in range(table_widget.rowCount()):
+            for col in range(table_widget.columnCount()):
+                item = table_widget.item(row, col)
+                if item is not None:
+                    item.setText("")
+
 
     def on_startButton_click(self):
         table_widget = self.findChild(QTableWidget, 'processTable')
