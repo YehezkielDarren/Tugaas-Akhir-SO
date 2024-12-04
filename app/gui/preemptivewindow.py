@@ -39,9 +39,52 @@ class PreemptiveInterface(BaseInterface):
             row = item.row()
             table_widget = self.findChild(QTableWidget, 'processTable')
 
-            process_name = QTableWidgetItem(f'P{row + 1}')
-            process_name.setFlags(~Qt.ItemFlag.ItemIsEditable)
-            table_widget.setItem(row, 0, process_name)
+            table_widget.blockSignals(True)
+
+            column_1_text = table_widget.item(
+                row, 1).text() if table_widget.item(row, 1) else ""
+            column_2_text = table_widget.item(
+                row, 2).text() if table_widget.item(row, 2) else ""
+
+            column_1 = table_widget.item(row, 1)
+            column_2 = table_widget.item(row, 2)
+
+            if item.column() == 1:
+                column_1_checker = item.text().strip()
+                if not column_1_checker.isdigit():
+                    InfoBar.warning(
+                        title='Arrival Time',
+                        content="Arrival time must be an integer.",
+                        orient=Qt.Horizontal,
+                        isClosable=True,
+                        position=InfoBarPosition.TOP,
+                        duration=2000,
+                        parent=self
+                    )
+                    column_1.setText("")
+
+            if item.column() == 2:
+                column_2_checker = item.text().strip()
+                if not column_2_checker.isdigit():
+                    InfoBar.warning(
+                        title='Burst Time',
+                        content="Burst time must be an integer.",
+                        orient=Qt.Horizontal,
+                        isClosable=True,
+                        position=InfoBarPosition.TOP,
+                        duration=2000,
+                        parent=self
+                    )
+                    column_2.setText("")
+
+            table_widget.blockSignals(False)
+
+            if column_1_text.strip() or column_2_text.strip():
+                process_name = QTableWidgetItem(f'P{row + 1}')
+                process_name.setFlags(~Qt.ItemFlag.ItemIsEditable)
+                table_widget.setItem(row, 0, process_name)
+            else:
+                table_widget.setItem(row, 0, QTableWidgetItem(""))
 
     def on_ganttButton_click(self):
         table_widget = self.findChild(QTableWidget, 'processTable')
