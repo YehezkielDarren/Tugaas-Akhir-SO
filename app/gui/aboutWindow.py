@@ -36,7 +36,7 @@ class AboutWindow(QDialog):
             {
                 "name": "Benedictus Karol Wojtyfa P. S.",
                 "role": "Developer",
-                "quotes": "Aku gay\nkarol 2k24"
+                "quotes": "Timotius 5:23"
             }
         ]
         self.__init_layout()
