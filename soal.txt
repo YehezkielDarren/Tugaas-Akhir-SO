@@ -1,0 +1,23 @@
+#Normal
+arrival time:
+5 1 8 2 10
+burst time:
+4 2 1 2 1
+
+#test error handling
+arrival time:
+3 1 2 4 7
+burst time:
+4 0 1 2 1
+
+#double arrival time-different burst time
+arrival time:
+0 1 3 3 7
+burst time:
+2 2 1 3 1
+
+#double arrival time-same burst time
+arrival time:
+0 1 3 3 7
+burst time:
+3 2 1 1 3
