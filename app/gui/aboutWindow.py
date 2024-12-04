@@ -26,7 +26,7 @@ class AboutWindow(QDialog):
             {
                 "name": "Bernadus Xaverius H.",
                 "role": "Developer",
-                "quotes": "???"
+                "quotes": "Nama juga hidup kadang diatas kadang digidaw"
             },
             {
                 "name": "Yehezkiel Darren P. W.",
@@ -123,7 +123,7 @@ class AboutWindow(QDialog):
 
             SubtitleLabel {{
                 font-size: 14px;
-                padding: 5px;
+                padding: 2px;
                 margin: 5px;
             }}
 
