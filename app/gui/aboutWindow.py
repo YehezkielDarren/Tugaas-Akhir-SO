@@ -31,12 +31,12 @@ class AboutWindow(QDialog):
             {
                 "name": "Yehezkiel Darren P. W.",
                 "role": "Developer",
-                "quotes": "???"
+                "quotes": "Selamat menempuh hidup baru Ivan :D"
             },
             {
                 "name": "Benedictus Karol Wojtyfa P. S.",
                 "role": "Developer",
-                "quotes": "???"
+                "quotes": "Oshinya Christi JKT48"
             }
         ]
         self.__init_layout()
