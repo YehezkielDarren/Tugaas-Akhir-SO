@@ -83,3 +83,10 @@ class GanttChart:
         plt.title('Gantt Chart')
         plt.xlabel('Time')
         return fig
+
+# Kalau mau debug
+# if __name__ == '__main__':
+#     processes = [[1, 0, 6], [2, 1, 8], [3, 2, 7], [4, 3, 3]]
+#     gantt = GanttChart(processes)
+#     fig = gantt.render()
+#     plt.show()

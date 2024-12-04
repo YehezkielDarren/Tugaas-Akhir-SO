@@ -60,3 +60,12 @@ class SJF_Preemptive:
         avg_tat = total_tat / self.n
 
         return result, avg_wt, avg_tat
+
+# Kalau Mau Debug
+# if __name__ == '__main__':
+#     processes = [[1, 0, 6], [2, 1, 8], [3, 2, 7], [4, 3, 3]]
+#     sjf = SJF_Preemptive(processes)
+#     result, avg_wt, avg_tat = sjf.findAverageTime()
+#     print(result)
+#     print(avg_wt)
+#     print(avg_tat)
