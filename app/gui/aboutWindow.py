@@ -36,7 +36,7 @@ class AboutWindow(QDialog):
             {
                 "name": "Benedictus Karol Wojtyfa P. S.",
                 "role": "Developer",
-                "quotes": "Aku gay\nkarol 2k24"
+                "quotes": "!Timotius 5:23, Janganlah lagi minum air saja, melainkan tambahkanlah anggur sedikit, berhubung pencernaanmu terganggu dan tubuhmu sering lemah"
             }
         ]
         self.__init_layout()
