@@ -87,7 +87,9 @@ class PreemptiveInterface(BaseInterface):
                 process_name.setFlags(~Qt.ItemFlag.ItemIsEditable)
                 table_widget.setItem(row, 0, process_name)
             else:
-                table_widget.setItem(row, 0, QTableWidgetItem(""))
+                process_name = QTableWidgetItem("")
+                process_name.setFlags(~Qt.ItemFlag.ItemIsEditable)
+                table_widget.setItem(row, 0, process_name)
 
     def on_ganttButton_click(self):
         table_widget = self.findChild(QTableWidget, 'processTable')
@@ -186,7 +188,6 @@ class PreemptiveInterface(BaseInterface):
                 item = table_widget.item(row, col)
                 if item is not None:
                     item.setText("")
-
 
     def on_startButton_click(self):
         table_widget = self.findChild(QTableWidget, 'processTable')
